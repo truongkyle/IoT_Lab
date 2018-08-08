@@ -1,24 +1,19 @@
 package com.example.ritodoji.ledcontrolmqtt;
 
-import android.os.Bundle;
+
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+
 
 import com.google.android.things.pio.PeripheralManager;
 import com.google.android.things.pio.SpiDevice;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SPITempADS111 {
     private static final String TAG = "SPI_RASPBERRY";
     private SpiDevice mDevice;
-    private Timer timer;
     DataTemp dataTemp;
     public interface DataTemp{
          void setText(String x);
@@ -37,14 +32,14 @@ public class SPITempADS111 {
         }
     }
 
-    public void configSPIDevice(SpiDevice device) throws IOException {
+    private void configSPIDevice(SpiDevice device) throws IOException {
         device.setMode(SpiDevice.MODE1); // MODE0
         device.setFrequency(1000000); //1Mhz
         device.setBitJustification(SpiDevice.BIT_JUSTIFICATION_MSB_FIRST); // MSB trước
         device.setBitsPerWord(8); // 8 bits
         Log.d(TAG,"SPI OK now ....");
     }
-    public void sendCommnad(SpiDevice device, byte[] buffer) throws IOException {
+    private void sendCommnad(SpiDevice device, byte[] buffer) throws IOException {
 
         byte[] response = new byte[4];
         device.transfer(buffer, response, buffer.length);
@@ -58,20 +53,25 @@ public class SPITempADS111 {
         int b = Integer.parseInt(String.valueOf(response[1]));
         Log.d(TAG,"bits 0 : = "+ Integer.toBinaryString((a+256)%256)+" bits 1 : = "+ Integer.toBinaryString((b+256)%256));
 
-        double raw_value = (double)((response[0]*256) + response[1]); // 16 bits data
+       // double raw_value = (double)((response[0]*256) + response[1]); // 16 bits data
         double raw_dataTempInterval = (double)(((response[0]<<8) + response[1])>>2); // 14 bits
-        double adc_value = raw_value * 6.144/32768; //Check in data
-        double temperature = adc_value/(10.0 / 1000);
+        //double adc_value = raw_value * 6.144/32768; //Check in data
+       // double temperature = adc_value/(10.0 / 1000);
         double temperature1 = raw_dataTempInterval*0.03125;
         //nea.setText(String.valueOf(raw_value));
         //asd.setText(String.valueOf(raw_value));
         //Log.d(TAG,"rawdata: " + raw_value +", adc_volt: " +adc_value +" temp : " + temperature);
         Log.d(TAG,"rawdata: " + raw_dataTempInterval +", adc_volt: " +0 +" temp : " + temperature1);
-        dataTemp.setText(String.valueOf(temperature1));
+        int xx = Double.valueOf(temperature1).intValue();
+        if((temperature1-xx) >=0.5){
+            xx = xx +1;
+        }
+        Log.d(TAG,"xxx: " + xx);
+        dataTemp.setText(String.valueOf(xx));
     }
     private void setup_Timer(){
 
-        timer = new Timer();
+        Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -89,9 +89,9 @@ public class SPITempADS111 {
                 Log.d(TAG,"sent!! ~ ");
             }
         };
-        timer.schedule(timerTask,2000, 1000);
+        timer.schedule(timerTask,2000, 2000);
     }
-   public void onDestroy(){
+   public void onDestroyz(){
         if(mDevice!=null){
             try {
                 mDevice.close();

@@ -10,9 +10,9 @@
         android:id="@+id/textViewShowtemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="105dp"
+        android:layout_toEndOf="@+id/textViewTemp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="98dp" />
 
     <TextView
@@ -22,40 +22,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/textViewShowtemp"
         android:layout_marginStart="25dp"
-        android:text="Tempa" />
+        android:text="TempLivingroom:" />
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="226dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="127dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Your message got here"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="329dp" />
 
-    <TextView
-        android:id="@+id/texta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="198dp"
-        android:text="TextView" />
+
 
 </RelativeLayout>
