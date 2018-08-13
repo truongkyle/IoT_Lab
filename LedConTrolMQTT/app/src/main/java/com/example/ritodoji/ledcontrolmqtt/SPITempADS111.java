@@ -33,7 +33,7 @@ public class SPITempADS111 {
     }
 
     private void configSPIDevice(SpiDevice device) throws IOException {
-        device.setMode(SpiDevice.MODE1); // MODE0
+        device.setMode(SpiDevice.MODE1); // MODE1
         device.setFrequency(1000000); //1Mhz
         device.setBitJustification(SpiDevice.BIT_JUSTIFICATION_MSB_FIRST); // MSB trước
         device.setBitsPerWord(8); // 8 bits
@@ -81,7 +81,7 @@ public class SPITempADS111 {
                     test_data[3] = (byte)(0x00);
                     test_data[2] = (byte)(0x00);
                     test_data[0] = (byte)(0x70); //ADS111 channel 3 = 70, 2 = 600, 1 = 50, 0 = 40
-                    test_data[1] = (byte)(0x9b); //Check in datasheet for this value and note in your report
+                    test_data[1] = (byte)(0x9b); //Check in datasheet for this value ( 0x8b = ADC mode , 0x9b = Temperture mode )
                     sendCommnad(mDevice, test_data);
                 } catch (IOException e) {
                     e.printStackTrace();
