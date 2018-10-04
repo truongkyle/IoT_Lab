@@ -151,15 +151,10 @@ public class MainActivity extends Activity {
 
             try {
                 String a = Double.toString(mActivePulseDuration);
-                Log.e(TAG, "ádfsdadsaaaaaaaaaaaa");
 
-                if(mIsPulseIncreasing) {
-                    Log.e(TAG, "fsdtang "+Double.toString(100*mActivePulseDuration / PULSE_PERIOD_MS));
-                }else {
-                    Log.e(TAG,"giammmm"+Double.toString(100*mActivePulseDuration / PULSE_PERIOD_MS));
-                }
+
                 ++i;
-                Log.e(TAG, "ádfsda");
+
                 if (i == 20) {
                     switch (mLedState) {
                         case LED_RED:
@@ -193,7 +188,6 @@ public class MainActivity extends Activity {
                 }
 
                 mPwm.setPwmDutyCycle(100*mActivePulseDuration / PULSE_PERIOD_MS);
-                Log.e(TAG, "ádfsdayyyyyyyyyyyyyyy");
                 mHandler.postDelayed(mChangePWMRunnable, INTERVAL_BETWEEN_STEPS_MS);
             } catch (IOException e) {
                 Log.e(TAG, "Error on PeripheralIO API", e);
