@@ -30,7 +30,6 @@ import java.io.IOException;
  * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
  */
 public class MainActivity extends Activity {
-
     private static String TAG = MainActivity.class.getSimpleName();
     private static String mLedPinR = BoardDefaults.getGPIOForLedR();
     private static String mLedPinG = BoardDefaults.getGPIOForLedG();
@@ -65,9 +64,11 @@ public class MainActivity extends Activity {
         }
 
         mHandler.post(mRunnableLedB);
-
+        mHandler.post(mRunnableLedG);
+        mHandler.post(mRunnableLedR);
 
     }
+
 
     private Runnable mRunnableLedR = new Runnable() {
         @Override
@@ -77,15 +78,8 @@ public class MainActivity extends Activity {
                 mLedGpioR.setValue(mLedStateR);
                 Log.d(TAG,"Red");
 
-                if(i==2){
-                    mHandler.removeCallbacks(mRunnableLedR);
-                    Log.d(TAG,"remove Red");
-                    mHandler.post(mRunnableLedG);
-                }
-                if(i==1) {
-                    //i =2;
-                    mHandler.postDelayed(mRunnableLedR, 500);
-                }
+                mHandler.postDelayed(mRunnableLedR, 500);
+
             } catch (IOException e){
                 Log.e(TAG,"Error: ",e);
             }
@@ -96,19 +90,11 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
             mLedStateG = !mLedStateG;
-            try{
-                Log.d(TAG,"Green");
+            try {
+                Log.d(TAG, "Green");
                 mLedGpioG.setValue(mLedStateG);
+                mHandler.postDelayed(mRunnableLedG, 1000);
 
-                if(i==3){
-                    mHandler.removeCallbacks(mRunnableLedG);
-                    mHandler.post(mRunnableLedB);
-                }
-
-                if(i==2) {
-                    i=3;
-                    mHandler.postDelayed(mRunnableLedG, 1000);
-                }
             } catch (IOException e){
                 Log.e(TAG,"Error: ",e);
             }
@@ -122,16 +108,8 @@ public class MainActivity extends Activity {
             try{
                 Log.d(TAG,"Blue");
                 mLedGpioB.setValue(mLedStateB);
+                mHandler.postDelayed(mRunnableLedB, 2000);
 
-                if(i==1){
-                    mHandler.removeCallbacks(mRunnableLedB);
-                    mHandler.post(mRunnableLedR);
-                }
-
-                if(i==3) {
-                    i=1;
-                    mHandler.postDelayed(mRunnableLedB, 2000);
-                }
             } catch (IOException e){
                 Log.e(TAG,"Error: ",e);
             }
