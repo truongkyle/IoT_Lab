@@ -123,7 +123,7 @@ public class MainActivity extends Activity {
                     mLedStateB = true;
                     mLedStateG = false;
                     mLedStateR = true;
-                    mLedState = LED_RED;
+                    mLedState = LED_BLUE;
                     break;
                  default:
                      break;
