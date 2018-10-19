@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:id="@+id/xx">
+        <Button
+        android:id="@+id/button"
+            android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start" />
+        <TextView
+            android:id="@+id/tag_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tag_detected"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+        android:id="@+id/tag_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        tools:text="Tag UID"
+        tools:visibility="visible" />
+
+        <TextView
+        android:id="@+id/tag_results"
+            android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/tag_uid"
+        tools:text="Tag results"
+        tools:visibility="visible" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/xx"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <Button
+            android:id="@+id/button1"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="write" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="name"
+            android:textSize="15sp"
+            android:id="@+id/name"
+            />
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="mssv"
+            android:id="@+id/mssv"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="dob: 2806"
+            android:id="@+id/dob"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
